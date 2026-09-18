@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Kashmir Cures pharmacy and beauty essentials delivered with care." />
+  <title>Kashmir Cures | Pharmacy, beauty, delivered</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="announcement"><span>Free delivery on orders over ₹1,500</span><span class="announcement-note"><i data-lucide="shield-check"></i> Licensed pharmacy partners</span></div>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Kashmir Cures home"><span class="brand-mark"><i data-lucide="plus"></i></span><span>Kashmir Cures</span></a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a class="active" href="#shop">Shop</a><a href="#care">Care guides</a><a href="#about">About us</a>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-button" id="searchButton" aria-label="Search"><i data-lucide="search"></i></button>
+      <button class="icon-button bag-button" id="cartButton" aria-label="Open shopping bag"><i data-lucide="shopping-bag"></i><span id="cartCount">0</span></button>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero" id="about">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow-dot"></span> Thoughtful everyday care</p>
+        <h1>Feel good.<br /><em>Live brighter.</em></h1>
+        <p class="hero-text">Trusted medicine and considered beauty essentials, chosen to make your daily care feel a little easier.</p>
+        <a class="primary-button" href="#shop">Explore the edit <i data-lucide="arrow-up-right"></i></a>
+        <div class="hero-proof"><div class="avatar-stack"><span>AM</span><span>JL</span><span>RK</span></div><span>Join 12,000+ happy customers</span></div>
+      </div>
+      <div class="hero-image-wrap">
+        <div class="hero-image"><img src="https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?auto=format&fit=crop&w=1100&q=85" alt="Clean skincare bottles and leaves" /></div>
+        <div class="hero-float"><span class="float-icon"><i data-lucide="truck"></i></span><span><strong>Same-day care</strong><small>When you need it most</small></span></div>
+        <span class="image-sticker">Pharmacy<br /><b>+</b> beauty</span>
+      </div>
+    </section>
+
+    <section class="shop-section" id="shop">
+      <div class="section-heading"><div><p class="eyebrow">The Kashmir Cures edit</p><h2>Care, curated.</h2></div><p class="section-intro">Simple staples and small luxuries for your medicine cabinet, bathroom shelf, and everything in between.</p></div>
+      <div class="shop-toolbar"><div class="category-tabs" role="tablist"><button class="tab active" data-category="All">All products</button><button class="tab" data-category="Medicine">Medicine</button><button class="tab" data-category="Skincare">Skincare</button><button class="tab" data-category="Wellness">Wellness</button></div><button class="filter-button" id="filterButton"><i data-lucide="sliders-horizontal"></i> Filter</button></div>
+      <div class="product-grid" id="productGrid"></div>
+      <div class="category-banner"><div><p class="eyebrow">A softer routine starts here</p><h3>Little rituals,<br /><em>big difference.</em></h3></div><a class="text-link" href="#shop">Shop skincare <i data-lucide="arrow-right"></i></a></div>
+    </section>
+
+    <section class="care-strip" id="care"><div class="care-item"><i data-lucide="heart-pulse"></i><div><strong>Care you can trust</strong><span>Curated with pharmacists</span></div></div><div class="care-item"><i data-lucide="package-check"></i><div><strong>Discreet delivery</strong><span>Packed with privacy in mind</span></div></div><div class="care-item"><i data-lucide="message-circle"></i><div><strong>Real human help</strong><span>Friendly advice, anytime</span></div></div></section>
+  </main>
+
+  <footer class="site-footer"><div class="brand footer-brand"><span class="brand-mark"><i data-lucide="plus"></i></span><span>Kashmir Cures</span></div><p>Everyday care, made considered.</p><span class="footer-copy">© 2026 Kashmir Cures Health Co.</span></footer>
+
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping bag"><div class="drawer-head"><div><p class="eyebrow">Your bag</p><h2>Ready when you are.</h2></div><button class="close-button" id="closeCart" aria-label="Close shopping bag"><i data-lucide="x"></i></button></div><div class="cart-items" id="cartItems"></div><div class="cart-empty" id="cartEmpty"><i data-lucide="shopping-bag"></i><p>Your bag is waiting.<br />Add something good for you.</p></div><div class="cart-footer" id="cartFooter"><div class="subtotal"><span>Subtotal</span><strong id="cartTotal">₹0.00</strong></div><button class="checkout-button" id="checkoutButton">Continue to checkout <i data-lucide="arrow-up-right"></i></button><small>Taxes and delivery calculated at checkout.</small></div></aside><div class="drawer-overlay" id="drawerOverlay"></div><div class="toast" id="toast"><i data-lucide="check"></i><span>Added to your bag</span></div>
+  <section class="checkout-page" id="checkoutPage" aria-label="Checkout" hidden>
+    <div class="checkout-shell">
+      <div class="checkout-topbar"><button class="back-button" id="backToShop"><i data-lucide="arrow-left"></i> Back to shopping</button><div class="checkout-brand"><span class="brand-mark"><i data-lucide="plus"></i></span><strong>Kashmir Cures</strong></div><span class="secure-checkout"><i data-lucide="lock-keyhole"></i> Secure checkout</span></div>
+      <div class="checkout-layout">
+        <div class="checkout-form-wrap">
+          <div class="checkout-heading"><p class="eyebrow">Almost there</p><h1>Complete your order.</h1><p>We will use these details to deliver your care with discretion.</p></div>
+          <form id="checkoutForm">
+            <fieldset><legend><span>01</span> Contact information</legend><div class="form-grid"><label>Email address<input type="email" name="email" placeholder="you@example.com" required /></label><label>Phone number<input type="tel" name="phone" placeholder="+91 98765 43210" required /></label></div><label class="check-label"><input type="checkbox" checked /> Send me order updates by email</label></fieldset>
+            <fieldset><legend><span>02</span> Delivery address</legend><div class="form-grid"><label>First name<input type="text" name="firstName" placeholder="Aarav" required /></label><label>Last name<input type="text" name="lastName" placeholder="Kaul" required /></label></div><label>Address<input type="text" name="address" placeholder="House no., street, area" required /></label><div class="form-grid three"><label>City<input type="text" name="city" placeholder="Srinagar" required /></label><label>State<select name="state" required><option value="">Select state</option><option>Jammu and Kashmir</option><option>Delhi</option><option>Maharashtra</option><option>Punjab</option><option>Other</option></select></label><label>PIN code<input type="text" name="pin" placeholder="190001" pattern="[0-9]{6}" required /></label></div><label>Delivery notes <span class="optional">(optional)</span><input type="text" name="notes" placeholder="Apartment, landmark, or instructions" /></label></fieldset>
+            <fieldset><legend><span>03</span> Prescription <span class="optional">(optional)</span></legend><div class="prescription-upload"><input id="prescriptionInput" type="file" accept="image/jpeg,image/png,image/webp" multiple /><label class="upload-dropzone" for="prescriptionInput"><span class="upload-icon"><i data-lucide="upload-cloud"></i></span><strong>Upload prescription images</strong><small>JPG, PNG, or WEBP · up to 5 images</small></label><div class="prescription-previews" id="prescriptionPreviews"></div></div><p class="upload-note"><i data-lucide="shield-check"></i> Your prescription is used only to verify eligible medicines with our pharmacy team.</p></fieldset>
+            <fieldset><legend><span>04</span> Payment method</legend><div class="payment-tabs"><button type="button" class="payment-tab active" data-payment="card"><i data-lucide="credit-card"></i> Card</button><button type="button" class="payment-tab" data-payment="upi"><i data-lucide="smartphone"></i> UPI</button><button type="button" class="payment-tab" data-payment="cod"><i data-lucide="banknote"></i> Cash on delivery</button></div><div class="payment-panel" id="cardPanel"><label>Card number<input type="text" inputmode="numeric" placeholder="1234  5678  9012  3456" required /></label><div class="form-grid"><label>Expiry date<input type="text" placeholder="MM / YY" required /></label><label>CVV<input type="password" inputmode="numeric" placeholder="•••" required /></label></div><label>Name on card<input type="text" placeholder="Name as shown on card" required /></label></div><div class="payment-panel" id="upiPanel" hidden><label>UPI ID<input type="text" placeholder="name@bank" /></label><p class="payment-hint"><i data-lucide="info"></i> You will be redirected to your UPI app after placing the order.</p></div><div class="payment-panel" id="codPanel" hidden><p class="payment-hint"><i data-lucide="package-check"></i> Pay in cash when your order arrives. A small ₹25 handling fee applies.</p></div><label class="check-label"><input type="checkbox" required /> I agree to the terms and privacy policy</label></fieldset>
+            <button class="place-order-button" type="submit">Place order <span id="placeOrderTotal">₹0.00</span><i data-lucide="arrow-up-right"></i></button>
+          </form>
+        </div>
+        <aside class="order-summary"><div class="summary-card"><div class="summary-title"><div><p class="eyebrow">Your order</p><h2>Order summary</h2></div><button class="edit-bag" id="editBag">Edit bag</button></div><div class="summary-items" id="summaryItems"></div><div class="summary-lines"><div><span>Subtotal</span><strong id="summarySubtotal">₹0.00</strong></div><div><span>Delivery</span><strong id="summaryDelivery">Free</strong></div><div class="summary-total"><span>Total</span><strong id="summaryTotal">₹0.00</strong></div></div><div class="summary-promise"><i data-lucide="shield-check"></i><div><strong>Your care, handled carefully.</strong><span>Discreet packaging and pharmacist-reviewed products.</span></div></div></div></aside>
+      </div>
+    </div>
+  </section>
+  <script src="app.js"></script>
+</body>
+</html>
