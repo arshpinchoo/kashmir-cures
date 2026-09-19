@@ -8,4 +8,4 @@
 
 Products are stored in the Supabase `public.products` table and uploaded to the `product-images` bucket so the same catalog is visible to every visitor. Do not rely on browser local storage for product data in production.
 
-The current manager uses the public anon key and public product write policies because this app has no login system. Before publishing, add Supabase Auth and replace the write policies with an authenticated admin policy; otherwise anyone who can open the app can manage products.
+The manager uses Supabase Auth and is restricted to the admin email configured in `supabase-config.js`. The SQL policies allow the public to read products, but only that authenticated admin account can insert, edit, delete, or upload product images. Never add a service-role key to the frontend.
