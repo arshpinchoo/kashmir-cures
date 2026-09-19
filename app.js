@@ -16,6 +16,7 @@ const fallbackProductImage='https://images.unsplash.com/photo-1528740561762-bdc9
 let products=[];
 let productsReady=false;
 let isAdmin=false;
+const adminAccessRequested=new URLSearchParams(window.location.search).get('admin')==='1'||window.location.hash==='#admin';
 
 function isProductCatalogOnline(){
   return Boolean(supabaseClient);
@@ -47,7 +48,7 @@ function money(value){return `₹${value.toFixed(2)}`}
 function escapeHtml(value){return String(value).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
 function isAuthorizedAdmin(user){return Boolean(user?.email&&supabaseSettings.adminEmail&&user.email.toLowerCase()===supabaseSettings.adminEmail.toLowerCase())}
 function requireAdmin(){if(isAdmin)return true;showToast('Admin sign-in required');openAdminAuth();return false}
-function updateAdminUi(){document.getElementById('manageProductsButton').hidden=!isAdmin;adminAuthButton.hidden=isAdmin;adminSignOut.hidden=!isAdmin;if(!isAdmin)closeProductManager()}
+function updateAdminUi(){document.getElementById('manageProductsButton').hidden=!isAdmin;adminAuthButton.hidden=!adminAccessRequested||isAdmin;adminSignOut.hidden=!isAdmin;if(!isAdmin)closeProductManager()}
 function openAdminAuth(){adminAuth.hidden=false;adminAuth.classList.add('open');adminAuthOverlay.classList.add('open');adminAuth.setAttribute('aria-hidden','false');document.body.style.overflow='hidden'}
 function closeAdminAuth(){adminAuth.classList.remove('open');adminAuthOverlay.classList.remove('open');adminAuth.setAttribute('aria-hidden','true');adminAuth.hidden=true;if(!isAdmin)document.body.style.overflow=''}
 async function handleAuthState(session){
@@ -143,7 +144,7 @@ function closeCart(){cartDrawer.classList.remove('open');overlay.classList.remov
 function openCheckout(){if(!cart.length)return;closeCart();renderCheckout();checkoutPage.hidden=false;document.body.classList.add('checkout-open');window.scrollTo({top:0,behavior:'smooth'})}
 function closeCheckout(){checkoutPage.hidden=true;document.body.classList.remove('checkout-open');window.scrollTo({top:0,behavior:'smooth'})}
 let toastTimer;function showToast(message='Added to your bag'){toast.querySelector('span').textContent=message;toast.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove('show'),2200)}
-adminAuthButton.addEventListener('click',openAdminAuth);document.getElementById('closeAdminAuth').addEventListener('click',closeAdminAuth);adminAuthOverlay.addEventListener('click',closeAdminAuth);adminAuthForm.addEventListener('submit',async event=>{event.preventDefault();if(!supabaseClient)return;const formData=new FormData(adminAuthForm);const {error}=await supabaseClient.auth.signInWithPassword({email:String(formData.get('email')).trim(),password:String(formData.get('password'))});if(error)showToast(`Sign-in failed: ${error.message}`)});adminSignOut.addEventListener('click',()=>supabaseClient?.auth.signOut());if(supabaseClient){supabaseClient.auth.onAuthStateChange((_event,session)=>handleAuthState(session));supabaseClient.auth.getSession().then(({data})=>handleAuthState(data.session))}updateAdminUi();
+adminAuthButton.addEventListener('click',openAdminAuth);document.getElementById('closeAdminAuth').addEventListener('click',closeAdminAuth);adminAuthOverlay.addEventListener('click',closeAdminAuth);adminAuthForm.addEventListener('submit',async event=>{event.preventDefault();if(!supabaseClient)return;const formData=new FormData(adminAuthForm);const {error}=await supabaseClient.auth.signInWithPassword({email:String(formData.get('email')).trim(),password:String(formData.get('password'))});if(error)showToast(`Sign-in failed: ${error.message}`)});adminSignOut.addEventListener('click',()=>supabaseClient?.auth.signOut());if(supabaseClient){supabaseClient.auth.onAuthStateChange((_event,session)=>handleAuthState(session));supabaseClient.auth.getSession().then(({data})=>handleAuthState(data.session))}updateAdminUi();if(adminAccessRequested&&!isAdmin)openAdminAuth();
 document.getElementById('manageProductsButton').addEventListener('click',openProductManager);document.getElementById('closeProductManager').addEventListener('click',closeProductManager);productManagerOverlay.addEventListener('click',closeProductManager);document.getElementById('saveProducts').addEventListener('click',saveProducts);document.getElementById('resetProducts').addEventListener('click',()=>{if(window.confirm('Reset all product details to the original defaults?'))resetProducts()});
 document.querySelectorAll('.tab').forEach(tab=>tab.addEventListener('click',()=>{document.querySelector('.tab.active').classList.remove('active');tab.classList.add('active');activeCategory=tab.dataset.category;renderProducts()}));
 document.getElementById('filterButton').addEventListener('click',()=>{featuredOnly=!featuredOnly;document.getElementById('filterButton').innerHTML=featuredOnly?'<i data-lucide="x"></i> Clear filter':'<i data-lucide="sliders-horizontal"></i> Filter';renderProducts()});
